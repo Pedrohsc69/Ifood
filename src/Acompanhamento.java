@@ -1,0 +1,69 @@
+import java.util.List;
+import java.math.BigDecimal;
+
+public class Acompanhamento extends Base {
+    private String nome;
+    private String descricao;
+    private double valor;
+    private List<Produto> produtos;
+    private int quantidade;
+    private double valor_total;
+
+    Acompanhamento(String nome, double valor, String descricao, int id){
+        setId(id);
+        this.nome = nome;
+        this.valor = valor;
+        this.descricao = descricao;
+        this.quantidade = 1;
+        this.valor_total = valor;
+    }
+    Acompanhamento(String nome, double valor, String descricao){
+        this.nome = nome;
+        this.valor = valor;
+        this.descricao = descricao;
+        this.quantidade = 1;
+        this.valor_total = valor;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+
+    public String getDescricao() {
+        return descricao;
+    }
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+
+    public double getValor() {
+        return valor;
+    }
+    public void setValor(double valor) {
+        this.valor = valor;
+    }
+
+    public int getQuantidade(){
+        return quantidade;
+    }
+    public void setQuantidade(int quantidade){
+        this.quantidade = quantidade;
+        this.valor_total = valor * quantidade;
+    }
+
+    public double getValor_total(){
+        return valor_total;
+    }
+
+    public List<Produto> getProdutos() {
+        return produtos;
+    }
+    public void setProdutos(List<Produto> produtos) {
+        this.produtos = produtos;
+    }
+}
