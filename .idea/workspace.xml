@@ -4,40 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e209fc4f-eb39-4de5-875c-6dac83c5be80" name="Changes" comment="Front menu created">
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/mysql-connector-j-9.0.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Conexao/Conexao_BD.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/DAO/EnderecoDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/DAO/RestauranteDAO.java" afterDir="false" />
+    <list default="true" id="e209fc4f-eb39-4de5-875c-6dac83c5be80" name="Changes" comment="Conexão com o banco de dados">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Ifood.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Ifood.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Acompanhamento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Acompanhamento.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Associacao_Prod_Acomp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Associacao_Prod_Acomp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Associacao_Rest_Prod.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Associacao_Rest_Prod.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Avaliacao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Avaliacao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Base.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Base.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Carrinho.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Carrinho.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Categoria.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Categoria.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Endereco.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Endereco.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Forma_Pagamento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Forma_Pagamento.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Historico_Entrega.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Historico_Entrega.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Historico_Pagamento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Historico_Pagamento.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Horario_Funcionamento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Horario_Funcionamento.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ItemPedido.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/ItemPedido.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Menu_Inicial.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Menu_Inicial.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Opcs_Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Opcs_Menu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pedido.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Pedido.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pedido_Produto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Pedido_Produto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pedido_Produto_Acompanhamento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Pedido_Produto_Acompanhamento.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Produto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Produto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Produto_Acompanhamento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Produto_Acompanhamento.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Promocao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Promocao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Restaurante.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Restaurante.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Restaurante_Pagamento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Restaurante_Pagamento.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Serialize.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Serialize.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Status_Entrega.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Status_Entrega.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,7 +57,7 @@
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "advanced.settings"
+    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -131,7 +99,15 @@
       <option name="project" value="LOCAL" />
       <updated>1731950853417</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Conexão com o banco de dados">
+      <option name="closed" value="true" />
+      <created>1733233693238</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1733233693238</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -147,7 +123,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Front menu created" />
-    <option name="LAST_COMMIT_MESSAGE" value="Front menu created" />
+    <MESSAGE value="Conexão com o banco de dados" />
+    <option name="LAST_COMMIT_MESSAGE" value="Conexão com o banco de dados" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
