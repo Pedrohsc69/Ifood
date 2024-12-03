@@ -1,3 +1,5 @@
+package Entity;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -6,6 +8,8 @@ public class ItemPedido {
     private Produto produto;
     private int quantidade;
     private List<Acompanhamento> acompanhamentos;
+    private double precoTotalProd;
+    private double precoTotalAcomp;
     private double precoTotal;
 
     ItemPedido(Restaurante restaurante, Produto produto, int quantidade) {
@@ -13,7 +17,6 @@ public class ItemPedido {
         this.produto = produto;
         this.quantidade = quantidade;
         this.acompanhamentos = new ArrayList<>();
-        this.precoTotal = produto.getPreco() * quantidade;
     }
 
     public Restaurante getRestaurante() {
@@ -32,20 +35,28 @@ public class ItemPedido {
         return acompanhamentos;
     }
 
-    public double getPrecoTotal() {
-        return precoTotal;
-    }
-    private void calcularPrecoTotal() {
-        precoTotal = produto.getPreco() * quantidade;
-        for (Acompanhamento acompanhamento : acompanhamentos) {
-            precoTotal += acompanhamento.getValor_total();
-        }
-    }
 
     public void adicionarAcompanhamento(Acompanhamento acompanhamento) {
+        double preco = acompanhamento.getValor() * acompanhamento.getQuantidade();
+        acompanhamento.setValor_total(preco);
         acompanhamentos.add(acompanhamento);
         calcularPrecoTotal();
     }
 
+    private void calcularPrecoTotal() {
+        precoTotalProd = produto.getPreco() * quantidade;
+        for (Acompanhamento acompanhamento : acompanhamentos) {
+            precoTotalAcomp = acompanhamento.getValor_total();
+        }
+        precoTotal = precoTotalProd + precoTotalAcomp;
+    }
 
+    public double getPrecoTotal() {
+        //calcularPrecoTotal();
+        return precoTotal;
+    }
+
+    public double getPrecoTotalProd() {
+        return precoTotalProd;
+    }
 }

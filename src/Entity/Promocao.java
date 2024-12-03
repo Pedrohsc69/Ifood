@@ -1,3 +1,5 @@
+package Entity;
+
 import java.math.BigDecimal;
 import java.sql.Date;
 

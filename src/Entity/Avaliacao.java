@@ -1,3 +1,5 @@
+package Entity;
+
 public class Avaliacao extends Base{
     private int nota;
     private Pedido pedido;

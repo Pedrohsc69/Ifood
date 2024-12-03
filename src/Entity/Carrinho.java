@@ -1,3 +1,5 @@
+package Entity;
+
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,12 +27,12 @@ public class Carrinho {
     }
 
     public void exibirCarrinho() {
-        StringBuilder sb = new StringBuilder("Carrinho:\n");
+        StringBuilder sb = new StringBuilder("Entity.Carrinho:\n");
         for (ItemPedido item : itens) {
-            sb.append("Restaurante: ").append(item.getRestaurante().getNome()).append("\n");
-            sb.append("-----Produto: ").append(item.getProduto().getNome())
+            sb.append("Entity.Restaurante: ").append(item.getRestaurante().getNome()).append("\n");
+            sb.append("-----Entity.Produto: ").append(item.getProduto().getNome())
                     .append("\n Quantidade: ").append(item.getQuantidade())
-                    .append("\n Preço: R$").append(item.getPrecoTotal()).append("\n");
+                    .append("\n Preço: R$").append(item.getPrecoTotalProd()).append("\n");
             if (!item.getAcompanhamentos().isEmpty()) {
                 sb.append("-----Acompanhamentos: \n");
                 for (Acompanhamento acompanhamento : item.getAcompanhamentos()) {

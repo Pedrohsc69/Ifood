@@ -1,3 +1,5 @@
+package Entity;
+
 public class Restaurante_Pagamento extends Base{
 
     private Restaurante restaurante;

@@ -1,3 +1,5 @@
+package Entity;
+
 import java.util.List;
 
 public class Restaurante extends Base {
@@ -25,8 +27,8 @@ public class Restaurante extends Base {
     }
 
 
-    public Endereco getEndereco() {
-        return endereco;
+    public int getEnderecoId() {
+        return endereco.getId();
     }
 
     public void setEndereco(Endereco endereco) {

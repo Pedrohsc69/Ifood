@@ -1,3 +1,5 @@
+package Entity;
+
 public class Status_Entrega extends Base{
 
     private final String Producao = "Produção";

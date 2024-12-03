@@ -1,3 +1,5 @@
+package Entity;
+
 import java.io.*;
 
 public class Serialize {

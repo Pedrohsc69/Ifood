@@ -1,3 +1,5 @@
+package Entity;
+
 public abstract class Base {
 
     private int id;

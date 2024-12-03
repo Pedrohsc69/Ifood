@@ -1,3 +1,5 @@
+package Entity;
+
 public class Forma_Pagamento extends Base{
 
     private final String pix = "Pix";

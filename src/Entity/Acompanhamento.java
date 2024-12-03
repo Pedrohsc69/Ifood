@@ -1,5 +1,6 @@
+package Entity;
+
 import java.util.List;
-import java.math.BigDecimal;
 
 public class Acompanhamento extends Base {
     private String nome;
@@ -28,25 +29,17 @@ public class Acompanhamento extends Base {
     public String getNome() {
         return nome;
     }
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
 
 
     public String getDescricao() {
         return descricao;
-    }
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
     }
 
 
     public double getValor() {
         return valor;
     }
-    public void setValor(double valor) {
-        this.valor = valor;
-    }
+
 
     public int getQuantidade(){
         return quantidade;
@@ -54,6 +47,10 @@ public class Acompanhamento extends Base {
     public void setQuantidade(int quantidade){
         this.quantidade = quantidade;
         this.valor_total = valor * quantidade;
+    }
+
+    public void setValor_total(double valor_total){
+        this.valor_total = valor_total;
     }
 
     public double getValor_total(){

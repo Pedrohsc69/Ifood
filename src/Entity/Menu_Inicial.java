@@ -1,3 +1,5 @@
+package Entity;
+
 import javax.swing.JOptionPane;
 import java.util.List;
 import java.util.Scanner;
@@ -93,23 +95,22 @@ public class Menu_Inicial {
                     Acompanhamento acompanhamento = acompanhamentos.get(i);
                     opcoesAcompanhamentos[i] = acompanhamento.getNome() + " - R$" + acompanhamento.getValor();
                 }
-                int escolhaAcompanhamento = JOptionPane.showOptionDialog(null, "Escolha um Acompanhemento", "Acompanhamento",
+                int escolhaAcompanhamento = JOptionPane.showOptionDialog(null, "Escolha um Acompanhemento", "Entity.Acompanhamento",
                         JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcoesAcompanhamentos, opcoesAcompanhamentos[0]);
 
                 if (escolhaAcompanhamento < acompanhamentos.size()) {
                     Acompanhamento acompanhamentoEscolhido = acompanhamentos.get(escolhaAcompanhamento);
                     String quantidadeStr = JOptionPane.showInputDialog("Quantos(as) " + acompanhamentoEscolhido.getNome() + " você deseja?");
                     int quantidade = Integer.parseInt(quantidadeStr);
-                    Acompanhamento novoAcomp = new Acompanhamento(acompanhamentoEscolhido.getNome(), acompanhamentoEscolhido.getValor(), acompanhamentoEscolhido.getDescricao());
-                    novoAcomp.setQuantidade(quantidade);
-                    itemPedido.adicionarAcompanhamento(novoAcomp);
+                    acompanhamentoEscolhido.setQuantidade(quantidade);
+                    itemPedido.adicionarAcompanhamento(acompanhamentoEscolhido);
                     JOptionPane.showMessageDialog(null, quantidade + " " + acompanhamentoEscolhido.getNome() + " adicionado(s) ao seu pedido.");
                 }
 
                 carrinho.adicionarItem(itemPedido);
 
                 String[] opcoesMaisProduto = { "Sim", "Não" };
-                int adicionarMaisProduto = JOptionPane.showOptionDialog(null, "Deseja adicionar mais algum produto ao seu pedido?", "Adicionar Produto",
+                int adicionarMaisProduto = JOptionPane.showOptionDialog(null, "Deseja adicionar mais algum produto ao seu pedido?", "Adicionar Entity.Produto",
                         JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcoesMaisProduto, opcoesMaisProduto[0]);
 
                 if (adicionarMaisProduto == 0) { // Sim

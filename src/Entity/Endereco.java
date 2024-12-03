@@ -1,3 +1,5 @@
+package Entity;
+
 public class Endereco extends Base{
 
     private String rua;
@@ -10,7 +12,8 @@ public class Endereco extends Base{
     private String cep;
     private Restaurante restaurante;
 
-    Endereco(String rua, String bairro, String cidade, int numeroCasa, String pontoReferencia, String cep){
+    Endereco(int id, String rua, String bairro, String cidade, int numeroCasa, String pontoReferencia, String cep){
+        setId(id);
         this.rua = rua;
         this.bairro = bairro;
         this.cidade = cidade;
@@ -19,7 +22,6 @@ public class Endereco extends Base{
         this.cep = cep;
 
     }
-
 
     public String getRua() {
         return rua;

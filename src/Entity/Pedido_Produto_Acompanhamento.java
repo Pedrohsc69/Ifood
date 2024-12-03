@@ -1,3 +1,5 @@
+package Entity;
+
 public class Pedido_Produto_Acompanhamento extends Base{
 
     private Pedido_Produto pedidoProduto;

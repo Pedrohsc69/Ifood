@@ -4,40 +4,40 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e209fc4f-eb39-4de5-875c-6dac83c5be80" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ifood.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Acompanhamento.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Associacao_Prod_Acomp.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Associacao_Rest_Prod.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Avaliacao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Base.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Carrinho.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Categoria.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Endereco.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Forma_Pagamento.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Historico_Entrega.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Historico_Pagamento.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Horario_Funcionamento.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ItemPedido.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Menu_Inicial.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Opcs_Menu.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Pedido.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Pedido_Produto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Pedido_Produto_Acompanhamento.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Produto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Produto_Acompanhamento.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Promocao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Restaurante.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Restaurante_Pagamento.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Serialize.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Status_Entrega.java" afterDir="false" />
+    <list default="true" id="e209fc4f-eb39-4de5-875c-6dac83c5be80" name="Changes" comment="Front menu created">
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/mysql-connector-j-9.0.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Conexao/Conexao_BD.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/DAO/EnderecoDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/DAO/RestauranteDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ifood.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Ifood.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Acompanhamento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Acompanhamento.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Associacao_Prod_Acomp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Associacao_Prod_Acomp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Associacao_Rest_Prod.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Associacao_Rest_Prod.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Avaliacao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Avaliacao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Base.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Base.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Carrinho.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Carrinho.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Categoria.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Categoria.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Endereco.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Endereco.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Forma_Pagamento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Forma_Pagamento.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Historico_Entrega.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Historico_Entrega.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Historico_Pagamento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Historico_Pagamento.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Horario_Funcionamento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Horario_Funcionamento.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ItemPedido.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/ItemPedido.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Menu_Inicial.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Menu_Inicial.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Opcs_Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Opcs_Menu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pedido.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Pedido.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pedido_Produto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Pedido_Produto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pedido_Produto_Acompanhamento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Pedido_Produto_Acompanhamento.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Produto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Produto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Produto_Acompanhamento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Produto_Acompanhamento.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Promocao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Promocao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Restaurante.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Restaurante.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Restaurante_Pagamento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Restaurante_Pagamento.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Serialize.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Serialize.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Status_Entrega.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Status_Entrega.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,6 +54,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Pedrohsc69&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Pedrohsc69/AulaTalles.git&quot;,
+    &quot;accountId&quot;: &quot;5cae0892-18e5-4307-8588-b550bc2a1f91&quot;
+  }
+}</component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 6
@@ -64,20 +76,33 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;advanced.settings&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/Flávio Cavalcanti/Downloads/mysql-connector-j-9.0.0/mysql-connector-j-9.0.0/mysql-connector-j-9.0.0.jar",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "advanced.settings"
   }
-}</component>
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Flávio Cavalcanti\Desktop\PEDRO\FACULDADE\2º PERIODO\JAVA POO\Ifood\.idea" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="Entity" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Main" />
+      <option name="MAIN_CLASS_NAME" value="Entity.Main" />
       <module name="Ifood" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -98,6 +123,15 @@
       <option name="presentableId" value="Default" />
       <updated>1730809215789</updated>
     </task>
+    <task id="LOCAL-00001" summary="Front menu created">
+      <option name="closed" value="true" />
+      <created>1731950853417</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1731950853417</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -110,6 +144,10 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Front menu created" />
+    <option name="LAST_COMMIT_MESSAGE" value="Front menu created" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

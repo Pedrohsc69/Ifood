@@ -1,4 +1,5 @@
-import java.math.BigDecimal;
+package Entity;
+
 import java.util.List;
 
 public class Produto extends Base {

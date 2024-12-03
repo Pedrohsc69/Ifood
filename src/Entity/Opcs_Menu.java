@@ -1,3 +1,5 @@
+package Entity;
+
 public class Opcs_Menu {
 
     private int Opc_Menu_Main;

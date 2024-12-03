@@ -1,3 +1,5 @@
+package Entity;
+
 import java.sql.Time;
 
 public class Horario_Funcionamento extends Base{
