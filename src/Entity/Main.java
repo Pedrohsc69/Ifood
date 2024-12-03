@@ -3,6 +3,7 @@ package Entity;
 import DAO.EnderecoDAO;
 import DAO.RestauranteDAO;
 
+import javax.swing.*;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -15,10 +16,10 @@ public class Main {
         // CRIAÇÃO DO RESTAURANTE 1 (rest1)
         Endereco end_rest1 = new Endereco(1,"Rua Graciliano", "Centro", "Petrolândia",
                 156, "Próximo ao banco Caixa", "56984-000");
-        new EnderecoDAO().cadastrarEndereco(end_rest1);
+        //new EnderecoDAO().cadastrarEndereco(end_rest1);
 
-        Restaurante rest1 = new Restaurante("Bom Papo", end_rest1, "(87) 9 9636-5452");
-        new RestauranteDAO().cadastrarRestaurante(rest1);
+        Restaurante rest1 = new Restaurante(1,"Bom Papo", end_rest1, "(87) 9 9636-5452");
+        //new RestauranteDAO().cadastrarRestaurante(rest1);
 
         Produto prod1_rest1 = new Produto("Hamburguer",
                 "Carne de hamburguer, tomate, alface e cebola", 9.99, 1);
@@ -46,7 +47,7 @@ public class Main {
         Endereco end_rest2 = new Endereco(2,"Rua Graciliano", "Centro", "Petrolândia",
                 156, "Próximo ao banco Caixa", "56984-000");
 
-        Restaurante rest2 = new Restaurante("Bonapeti", end_rest2, "(87) 9 7896-4563");
+        Restaurante rest2 = new Restaurante(2,"Bonapeti", end_rest2, "(87) 9 7896-4563");
 
         Produto prod1_rest2 = new Produto("Macarronada",
                 "Macarrão, Molho branco e Calabresa", 25, 1);
@@ -73,8 +74,6 @@ public class Main {
         // CRIAÇÃO DO MENU INICIAL
         Menu_Inicial menu = new Menu_Inicial(List_Rest_Prod, List_Prod_Acomp);
         menu.Exibir_Menu();
-
-
 
     }
 }

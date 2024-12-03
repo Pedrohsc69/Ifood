@@ -17,6 +17,11 @@ public class Produto extends Base {
         this.descricao = descricao;
         this.preco = preco;
     }
+    Produto(int id, String nome, double preco){
+        setId(id);
+        this.nome = nome;
+        this.preco = preco;
+    }
 
 
     public String getNome() {

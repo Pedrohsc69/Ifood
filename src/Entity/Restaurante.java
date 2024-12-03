@@ -12,10 +12,15 @@ public class Restaurante extends Base {
     private boolean isRetirada;
     private List<Produto> produtos;
 
-    Restaurante(String nome, Endereco endereco, String telefone) {
+    Restaurante(int id,String nome, Endereco endereco, String telefone) {
+        setId(id);
         this.nome = nome;
         this.endereco = endereco;
         this.telefone = telefone;
+    }
+    Restaurante(int id, String nome){
+        setId(id);
+        this.nome = nome;
     }
 
     public String getNome() {
