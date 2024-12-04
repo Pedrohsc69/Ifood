@@ -20,7 +20,6 @@ public class Associacao_Prod_Acomp {
         return acompanhamentos;
     }
 
-
     public void Add_Acomp(Acompanhamento acompanha){
         acompanhamentos.add(acompanha);
     }

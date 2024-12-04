@@ -9,6 +9,7 @@ import java.awt.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 import java.sql.Connection;
 
@@ -62,6 +63,41 @@ public class Menu_Inicial extends JDialog{
                 Produto produto = new Produto(resultSet.getInt("id"),
                         resultSet.getString("nome"), resultSet.getDouble("preco"));
                 associacaoAtual.Add_Produto(produto);
+            }
+
+            resultSet.close();
+            statement.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void carregarAssociacaoProd(){
+        try{
+            String query = "SELECT p.id, a.id AS acomp_id, a.nome AS acomp_nome, a.descricao, a.preco" +
+                    "FROM produto p" +
+                    "JOIN acompanhamento a ON p.id = a.id_produto";
+
+            Statement statement = conexao.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+
+            Associacao_Prod_Acomp associacaoAtual = null;
+            int produtoAtualId = -1;
+            while (resultSet.next()){
+                int produtoId = resultSet.getInt("id");
+                if (produtoId != produtoAtualId){
+                    Produto produto = new Produto(resultSet.getInt("id"),
+                            resultSet.getString("nome"), resultSet.getDouble("preco"));
+                    associacaoAtual = new Associacao_Prod_Acomp(produto);
+                    Assoc_Prod_Acomp.add(associacaoAtual);
+                    produtoAtualId =  produtoId;
+                }
+
+                Acompanhamento acompanhamento = new Acompanhamento(resultSet.getInt("acomp_id"),
+                        resultSet.getString("nome"), resultSet.getDouble("preco"),
+                        resultSet.getString("descricao"));
+                associacaoAtual.Add_Acomp(acompanhamento);
             }
 
             resultSet.close();
@@ -193,50 +229,119 @@ public class Menu_Inicial extends JDialog{
             String quantidadeStr = JOptionPane.showInputDialog("Quantos " + produtoEscolhido.getNome()
                     + " você deseja?");
             int quantidade = Integer.parseInt(quantidadeStr);
+            //listarAcompanhamentos(produtoEscolhido, associacaoRestaurante.getRestaurante(), quantidade);
+            perguntaAcompanhamento(produtoEscolhido, associacaoRestaurante.getRestaurante(), quantidade);
         } else {
             listarRestaurantes();
         }
 
     }
 
-    private void listarAcompanhamentos(ItemPedido itemPedido, Associacao_Rest_Prod associacaoRestaurante) {
-        for (Associacao_Prod_Acomp associacaoProduto : Assoc_Prod_Acomp) {
-            if (associacaoProduto.getProduto().equals(itemPedido.getProduto())) {
-                List<Acompanhamento> acompanhamentos = associacaoProduto.getAcompanha();
-                String[] opcoesAcompanhamentos = new String[acompanhamentos.size()];
-                for (int i = 0; i < acompanhamentos.size(); i++) {
+    private void perguntaAcompanhamento(Produto produtoEscolhido, Restaurante restauranteEscolhido, int quantidade){
+        String[] opcoesMenuAcomp = { "Sim", "Não" };
+
+        int resposta = JOptionPane.showOptionDialog(null,
+                "Você deseja adicionar acompanhamentos?", "Acompanhamentos",
+                JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,null, opcoesMenuAcomp, opcoesMenuAcomp[0]);
+
+
+        if (resposta == 0){
+            listarAcompanhamentos(produtoEscolhido, restauranteEscolhido, quantidade);
+        } else {
+            Pedido pedido = new Pedido(produtoEscolhido.getNome(), produtoEscolhido.getDescricao(),
+                    produtoEscolhido.getPreco(), null, restauranteEscolhido);
+            ItemPedido itemPedido = new ItemPedido(pedido, quantidade);
+            carrinho.adicionarItem(itemPedido);
+
+            //JOptionPane.showMessageDialog(null, "Item adicionado ao pedido: " +
+            //        itemPedido.getPedido().getNome() + "\n Preço total: R$" + itemPedido.getPrecoTotal());
+
+            carrinho.ExibirCarrinho();
+        }
+
+    }
+
+    private void listarAcompanhamentos(Produto produtoEscolhido, Restaurante restauranteEscolhido, int quantidade) {
+        //for (Associacao_Prod_Acomp associacaoProduto : Assoc_Prod_Acomp) {
+        //    if (associacaoProduto.getProduto().equals(itemPedido.getProduto())) {
+        //        List<Acompanhamento> acompanhamentos = associacaoProduto.getAcompanha();
+         //       String[] opcoesAcompanhamentos = new String[acompanhamentos.size()];
+        //        for (int i = 0; i < acompanhamentos.size(); i++) {
+        //            Acompanhamento acompanhamento = acompanhamentos.get(i);
+         //           opcoesAcompanhamentos[i] = acompanhamento.getNome() + " - R$" + acompanhamento.getValor();
+        //        }
+         //       int escolhaAcompanhamento = JOptionPane.showOptionDialog(null, "Escolha um Acompanhemento", "Entity.Acompanhamento",
+        //                JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcoesAcompanhamentos, opcoesAcompanhamentos[0]);
+
+         //       if (escolhaAcompanhamento < acompanhamentos.size()) {
+         //           Acompanhamento acompanhamentoEscolhido = acompanhamentos.get(escolhaAcompanhamento);
+         //           String quantidadeStr = JOptionPane.showInputDialog("Quantos(as) " + acompanhamentoEscolhido.getNome() + " você deseja?");
+          //          int quantidade = Integer.parseInt(quantidadeStr);
+          //          acompanhamentoEscolhido.setQuantidade(quantidade);
+          //          itemPedido.adicionarAcompanhamento(acompanhamentoEscolhido);
+          //          JOptionPane.showMessageDialog(null, quantidade + " " + acompanhamentoEscolhido.getNome() + " adicionado(s) ao seu pedido.");
+          //      }
+
+          //      carrinho.adicionarItem(itemPedido);
+
+           //     String[] opcoesMaisProduto = { "Sim", "Não" };
+           //     int adicionarMaisProduto = JOptionPane.showOptionDialog(null, "Deseja adicionar mais algum produto ao seu pedido?", "Adicionar Entity.Produto",
+          //              JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcoesMaisProduto, opcoesMaisProduto[0]);
+
+          //      if (adicionarMaisProduto == 0) { // Sim
+          //          Listar_Produtos(associacaoRestaurante);
+           //     } else {
+          //          carrinho.exibirCarrinho();
+          //      }
+           //     return;
+           // }
+      //  }
+
+
+        for (Associacao_Prod_Acomp assocProdAcomp : Assoc_Prod_Acomp){
+            if (assocProdAcomp.getProduto().equals(produtoEscolhido)){
+                List<Acompanhamento> acompanhamentos = assocProdAcomp.getAcompanha();
+                String[] opcoesAcompanha = new String[acompanhamentos.size() + 1];
+
+                for (int i = 0; i < acompanhamentos.size(); i++){
                     Acompanhamento acompanhamento = acompanhamentos.get(i);
-                    opcoesAcompanhamentos[i] = acompanhamento.getNome() + " - R$" + acompanhamento.getValor();
+                    opcoesAcompanha[i] = acompanhamento.getNome() + " - R$" + acompanhamento.getValor();
                 }
-                int escolhaAcompanhamento = JOptionPane.showOptionDialog(null, "Escolha um Acompanhemento", "Entity.Acompanhamento",
-                        JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcoesAcompanhamentos, opcoesAcompanhamentos[0]);
+                opcoesAcompanha[acompanhamentos.size()] = "Concluir Pedido";
 
-                if (escolhaAcompanhamento < acompanhamentos.size()) {
-                    Acompanhamento acompanhamentoEscolhido = acompanhamentos.get(escolhaAcompanhamento);
-                    String quantidadeStr = JOptionPane.showInputDialog("Quantos(as) " + acompanhamentoEscolhido.getNome() + " você deseja?");
-                    int quantidade = Integer.parseInt(quantidadeStr);
-                    acompanhamentoEscolhido.setQuantidade(quantidade);
-                    itemPedido.adicionarAcompanhamento(acompanhamentoEscolhido);
-                    JOptionPane.showMessageDialog(null, quantidade + " " + acompanhamentoEscolhido.getNome() + " adicionado(s) ao seu pedido.");
+                List<Acompanhamento> acompanhamentosEscolhidos = new ArrayList<>();
+                int escolhaAcompanha;
+                do {
+                    escolhaAcompanha = JOptionPane.showOptionDialog(null,
+                            "Acompanhamentos disponíveis para " + produtoEscolhido.getNome(),
+                            "Acompanhamentos", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
+                            null, opcoesAcompanha, opcoesAcompanha[0]);
+
+                    if (escolhaAcompanha < acompanhamentos.size()){
+                        Acompanhamento acompanhaEscolhido = acompanhamentos.get(escolhaAcompanha);
+                        acompanhamentosEscolhidos.add(acompanhaEscolhido);
+                    }
+
+                } while (escolhaAcompanha < acompanhamentos.size());
+
+                Pedido pedido = new Pedido(produtoEscolhido.getNome(), produtoEscolhido.getDescricao(),
+                        produtoEscolhido.getPreco(), null, restauranteEscolhido);
+                ItemPedido itemPedido = new ItemPedido(pedido, quantidade);
+                for (Acompanhamento acompanhamento : acompanhamentosEscolhidos) {
+                    itemPedido.adicionarAcompanhamento(acompanhamento);
                 }
-
                 carrinho.adicionarItem(itemPedido);
 
-                String[] opcoesMaisProduto = { "Sim", "Não" };
-                int adicionarMaisProduto = JOptionPane.showOptionDialog(null, "Deseja adicionar mais algum produto ao seu pedido?", "Adicionar Entity.Produto",
-                        JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcoesMaisProduto, opcoesMaisProduto[0]);
+                //JOptionPane.showMessageDialog(null, "Item adicionado ao pedido: " +
+                //        itemPedido.getPedido().getNome() + " com " + itemPedido.getAcompanhamentos().size() +
+                //        " acompanhamentos. \nPreço total: R$" + itemPedido.getPrecoTotal());
+                carrinho.ExibirCarrinho();
 
-                if (adicionarMaisProduto == 0) { // Sim
-                    Listar_Produtos(associacaoRestaurante);
-                } else {
-                    carrinho.exibirCarrinho();
-                }
-                return;
+
+
             }
         }
     }
-
-
 }
 
 

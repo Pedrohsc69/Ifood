@@ -1,9 +1,5 @@
 package Entity;
 
-import DAO.EnderecoDAO;
-import DAO.RestauranteDAO;
-
-import javax.swing.*;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -26,10 +22,10 @@ public class Main {
         Produto prod2_rest1 = new Produto("Pizza de Calabresa",
                 "Calabresa, Queijo mussarela e Cebola", 24.99, 2);
 
-        Acompanhamento acompa_prod1_rest1 = new Acompanhamento("Maionese caseira", 2.50,
-                "Maionese, alho, cebola e creme de leite", 1);
-        Acompanhamento acompa_prod2_rest1 = new Acompanhamento("Batata Frita", 15,
-                "Batata Frita com cheddar e bacon", 2);
+        Acompanhamento acompa_prod1_rest1 = new Acompanhamento(1, "Maionese caseira", 2.50,
+                "Maionese, alho, cebola e creme de leite");
+        Acompanhamento acompa_prod2_rest1 = new Acompanhamento(2, "Batata Frita", 15,
+                "Batata Frita com cheddar e bacon");
 
         Associacao_Rest_Prod assoc1 = new Associacao_Rest_Prod(rest1);
         Associacao_Prod_Acomp associacaoProdAcomp1 = new Associacao_Prod_Acomp(prod1_rest1);

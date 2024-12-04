@@ -10,7 +10,7 @@ public class Acompanhamento extends Base {
     private int quantidade;
     private double valor_total;
 
-    Acompanhamento(String nome, double valor, String descricao, int id){
+    Acompanhamento( int id, String nome, double valor, String descricao){
         setId(id);
         this.nome = nome;
         this.valor = valor;
@@ -18,7 +18,7 @@ public class Acompanhamento extends Base {
         this.quantidade = 1;
         this.valor_total = valor;
     }
-    Acompanhamento(String nome, double valor, String descricao){
+    Acompanhamento( String nome, double valor, String descricao){
         this.nome = nome;
         this.valor = valor;
         this.descricao = descricao;

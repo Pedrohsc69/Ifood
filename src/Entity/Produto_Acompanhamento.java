@@ -12,7 +12,6 @@ public class Produto_Acompanhamento extends Base{
         this.produto = produto;
     }
 
-
     public Acompanhamento getAcompanhamento() {
         return acompanhamento;
     }

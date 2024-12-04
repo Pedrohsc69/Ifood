@@ -4,27 +4,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ItemPedido {
-    private Restaurante restaurante;
-    private Produto produto;
+    private Pedido pedido;
+    //private Restaurante restaurante;
+    //private Produto produto;
     private int quantidade;
     private List<Acompanhamento> acompanhamentos;
     private double precoTotalProd;
     private double precoTotalAcomp;
     private double precoTotal;
 
-    ItemPedido(Restaurante restaurante, Produto produto, int quantidade) {
-        this.restaurante = restaurante;
-        this.produto = produto;
+    ItemPedido(Pedido pedido, int quantidade) {
+        this.pedido = pedido;
         this.quantidade = quantidade;
         this.acompanhamentos = new ArrayList<>();
     }
 
-    public Restaurante getRestaurante() {
-        return restaurante;
-    }
-
-    public Produto getProduto() {
-        return produto;
+    public Pedido getPedido(){
+        return pedido;
     }
 
     public int getQuantidade() {
@@ -44,7 +40,7 @@ public class ItemPedido {
     }
 
     private void calcularPrecoTotal() {
-        precoTotalProd = produto.getPreco() * quantidade;
+        precoTotalProd = pedido.getPreco() * quantidade;
         for (Acompanhamento acompanhamento : acompanhamentos) {
             precoTotalAcomp = acompanhamento.getValor_total();
         }
@@ -52,11 +48,14 @@ public class ItemPedido {
     }
 
     public double getPrecoTotal() {
-        //calcularPrecoTotal();
         return precoTotal;
     }
 
     public double getPrecoTotalProd() {
         return precoTotalProd;
+    }
+
+    public double getPrecoTotalAcomp(){
+        return precoTotalAcomp;
     }
 }
