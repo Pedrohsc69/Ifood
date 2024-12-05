@@ -5,8 +5,6 @@ import java.util.List;
 
 public class ItemPedido {
     private Pedido pedido;
-    //private Restaurante restaurante;
-    //private Produto produto;
     private int quantidade;
     private List<Acompanhamento> acompanhamentos;
     private double precoTotalProd;
@@ -17,10 +15,15 @@ public class ItemPedido {
         this.pedido = pedido;
         this.quantidade = quantidade;
         this.acompanhamentos = new ArrayList<>();
+        calcularPrecoTotal();
     }
 
     public Pedido getPedido(){
         return pedido;
+    }
+
+    public String getNomeRestaurante(){
+        return getPedido().getNomeRestaurante();
     }
 
     public int getQuantidade() {
@@ -40,9 +43,9 @@ public class ItemPedido {
     }
 
     private void calcularPrecoTotal() {
-        precoTotalProd = pedido.getPreco() * quantidade;
+        precoTotalProd = pedido.getPrecoProd() * quantidade;
         for (Acompanhamento acompanhamento : acompanhamentos) {
-            precoTotalAcomp = acompanhamento.getValor_total();
+            precoTotalAcomp += acompanhamento.getValor_total();
         }
         precoTotal = precoTotalProd + precoTotalAcomp;
     }

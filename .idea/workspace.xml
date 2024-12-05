@@ -4,16 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e209fc4f-eb39-4de5-875c-6dac83c5be80" name="Changes" comment="Adjustments to the connection with BD and start customizing menus">
+    <list default="true" id="e209fc4f-eb39-4de5-875c-6dac83c5be80" name="Changes" comment="Adjustments in menu">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/Acompanhamento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Acompanhamento.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Associacao_Prod_Acomp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Associacao_Prod_Acomp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/Carrinho.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Carrinho.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/ItemPedido.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/ItemPedido.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/Menu_Inicial.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Menu_Inicial.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/Pedido.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Pedido.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Produto_Acompanhamento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Produto_Acompanhamento.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -157,7 +154,15 @@
       <option name="project" value="LOCAL" />
       <updated>1733313095172</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Adjustments in menu">
+      <option name="closed" value="true" />
+      <created>1733354397000</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1733354397000</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -190,7 +195,8 @@
     <MESSAGE value="Front menu created" />
     <MESSAGE value="Conexão com o banco de dados" />
     <MESSAGE value="Adjustments to the connection with BD and start customizing menus" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adjustments to the connection with BD and start customizing menus" />
+    <MESSAGE value="Adjustments in menu" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adjustments in menu" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

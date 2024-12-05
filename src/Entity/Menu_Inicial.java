@@ -16,14 +16,10 @@ import java.sql.Connection;
 
 public class Menu_Inicial extends JDialog{
 
-    //Scanner scanner = new Scanner(System.in);
-    //Opcs_Menu opcoes = new Opcs_Menu();
-
     private Connection conexao;
     private Carrinho carrinho;
     private List<Associacao_Rest_Prod> Assoc_Rest_Prod;
     private List<Associacao_Prod_Acomp> Assoc_Prod_Acomp;
-
 
 
     public Menu_Inicial(List<Associacao_Rest_Prod> associacoes, List<Associacao_Prod_Acomp> Assoc_Prod_Acomp) {
@@ -34,11 +30,12 @@ public class Menu_Inicial extends JDialog{
         carregarAssociacoesRest();
     }
 
-    //public static void clearConsole() {
-    //    for (int i = 0; i < 50; i++) {
-    //        System.out.println();
-    //    }
-    //}
+    public Menu_Inicial() {
+        this.carrinho = new Carrinho();
+        this.conexao = Conexao_BD.getConexao();
+        carregarAssociacoesRest();
+        carregarAssociacaoProd();
+    }
 
     private void carregarAssociacoesRest(){
         try{
@@ -143,25 +140,7 @@ public class Menu_Inicial extends JDialog{
         }
     }
 
-    private void listarRestaurantes() {
-        //String[] opcoesRestaurantes = new String[Assoc_Rest_Prod.size() + 1];
-        //for (int i = 0; i < Assoc_Rest_Prod.size(); i++) {
-        //    Associacao_Rest_Prod associacao = Assoc_Rest_Prod.get(i);
-        //    Restaurante restaurante = associacao.getRestaurante();
-        //    opcoesRestaurantes[i] = restaurante.getNome();
-        //}
-        //opcoesRestaurantes[Assoc_Rest_Prod.size()] = "Voltar para menu inicial";
-
-        // int escolhaRestaurante = JOptionPane.showOptionDialog(null, "Escolha um restaurante", "Restaurantes",
-        //        JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcoesRestaurantes, opcoesRestaurantes[0]);
-
-        //if (escolhaRestaurante < Assoc_Rest_Prod.size()) {
-        //    Associacao_Rest_Prod associacaoRestaurante = Assoc_Rest_Prod.get(escolhaRestaurante);
-        //    Listar_Produtos(associacaoRestaurante);
-        //} else {
-        //    Exibir_Menu();
-        //}
-
+    void listarRestaurantes() {
         String[] opcaoRestaurante = new String[Assoc_Rest_Prod.size() + 1];
         for (int i = 0; i < Assoc_Rest_Prod.size(); i++){
             Associacao_Rest_Prod associacao = Assoc_Rest_Prod.get(i);
@@ -190,27 +169,7 @@ public class Menu_Inicial extends JDialog{
 
     }
 
-    private void Listar_Produtos(Associacao_Rest_Prod associacaoRestaurante) {
-        //List<Produto> produtos = associacaoRestaurante.getProdutos();
-        //String[] opcoesProdutos = new String[produtos.size() + 1];
-        //for (int i = 0; i < produtos.size(); i++) {
-        //    Produto produto = produtos.get(i);
-        //    opcoesProdutos[i] = produto.getNome();
-        //}
-        //opcoesProdutos[produtos.size()] = "Voltar para menu de restaurantes";
-
-        //int escolhaProduto = JOptionPane.showOptionDialog(null, "Escolha um produto", "Produtos",
-        //        JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcoesProdutos, opcoesProdutos[0]);
-
-        //if (escolhaProduto < produtos.size()) {
-        //    Produto produtoEscolhido = produtos.get(escolhaProduto);
-        //    String quantidadeStr = JOptionPane.showInputDialog("Quantos " + produtoEscolhido.getNome() + " você deseja?");
-        //    int quantidade = Integer.parseInt(quantidadeStr);
-        //    ItemPedido itemPedido = new ItemPedido(associacaoRestaurante.getRestaurante(), produtoEscolhido, quantidade);
-        //    listarAcompanhamentos(itemPedido, associacaoRestaurante);
-        //} else {
-        //    listarRestaurantes();
-        //}
+     private void Listar_Produtos(Associacao_Rest_Prod associacaoRestaurante) {
 
         List<Produto> produtos = associacaoRestaurante.getProdutos();
         String[] opcoesProdutos = new String[produtos.size() + 1];
@@ -244,59 +203,19 @@ public class Menu_Inicial extends JDialog{
                 "Você deseja adicionar acompanhamentos?", "Acompanhamentos",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,null, opcoesMenuAcomp, opcoesMenuAcomp[0]);
 
+        Pedido pedido = new Pedido(produtoEscolhido.getNome(), produtoEscolhido.getDescricao(),
+                produtoEscolhido.getPreco(), null, restauranteEscolhido);
+        ItemPedido itemPedido = new ItemPedido(pedido, quantidade);
 
         if (resposta == 0){
             listarAcompanhamentos(produtoEscolhido, restauranteEscolhido, quantidade);
         } else {
-            Pedido pedido = new Pedido(produtoEscolhido.getNome(), produtoEscolhido.getDescricao(),
-                    produtoEscolhido.getPreco(), null, restauranteEscolhido);
-            ItemPedido itemPedido = new ItemPedido(pedido, quantidade);
             carrinho.adicionarItem(itemPedido);
-
-            //JOptionPane.showMessageDialog(null, "Item adicionado ao pedido: " +
-            //        itemPedido.getPedido().getNome() + "\n Preço total: R$" + itemPedido.getPrecoTotal());
-
-            carrinho.ExibirCarrinho();
+            carrinho.ExibirCarrinho(this);
         }
 
     }
-
     private void listarAcompanhamentos(Produto produtoEscolhido, Restaurante restauranteEscolhido, int quantidade) {
-        //for (Associacao_Prod_Acomp associacaoProduto : Assoc_Prod_Acomp) {
-        //    if (associacaoProduto.getProduto().equals(itemPedido.getProduto())) {
-        //        List<Acompanhamento> acompanhamentos = associacaoProduto.getAcompanha();
-         //       String[] opcoesAcompanhamentos = new String[acompanhamentos.size()];
-        //        for (int i = 0; i < acompanhamentos.size(); i++) {
-        //            Acompanhamento acompanhamento = acompanhamentos.get(i);
-         //           opcoesAcompanhamentos[i] = acompanhamento.getNome() + " - R$" + acompanhamento.getValor();
-        //        }
-         //       int escolhaAcompanhamento = JOptionPane.showOptionDialog(null, "Escolha um Acompanhemento", "Entity.Acompanhamento",
-        //                JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcoesAcompanhamentos, opcoesAcompanhamentos[0]);
-
-         //       if (escolhaAcompanhamento < acompanhamentos.size()) {
-         //           Acompanhamento acompanhamentoEscolhido = acompanhamentos.get(escolhaAcompanhamento);
-         //           String quantidadeStr = JOptionPane.showInputDialog("Quantos(as) " + acompanhamentoEscolhido.getNome() + " você deseja?");
-          //          int quantidade = Integer.parseInt(quantidadeStr);
-          //          acompanhamentoEscolhido.setQuantidade(quantidade);
-          //          itemPedido.adicionarAcompanhamento(acompanhamentoEscolhido);
-          //          JOptionPane.showMessageDialog(null, quantidade + " " + acompanhamentoEscolhido.getNome() + " adicionado(s) ao seu pedido.");
-          //      }
-
-          //      carrinho.adicionarItem(itemPedido);
-
-           //     String[] opcoesMaisProduto = { "Sim", "Não" };
-           //     int adicionarMaisProduto = JOptionPane.showOptionDialog(null, "Deseja adicionar mais algum produto ao seu pedido?", "Adicionar Entity.Produto",
-          //              JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcoesMaisProduto, opcoesMaisProduto[0]);
-
-          //      if (adicionarMaisProduto == 0) { // Sim
-          //          Listar_Produtos(associacaoRestaurante);
-           //     } else {
-          //          carrinho.exibirCarrinho();
-          //      }
-           //     return;
-           // }
-      //  }
-
 
         for (Associacao_Prod_Acomp assocProdAcomp : Assoc_Prod_Acomp){
             if (assocProdAcomp.getProduto().equals(produtoEscolhido)){
@@ -310,6 +229,7 @@ public class Menu_Inicial extends JDialog{
                 opcoesAcompanha[acompanhamentos.size()] = "Concluir Pedido";
 
                 List<Acompanhamento> acompanhamentosEscolhidos = new ArrayList<>();
+                
                 int escolhaAcompanha;
                 do {
                     escolhaAcompanha = JOptionPane.showOptionDialog(null,
@@ -319,6 +239,12 @@ public class Menu_Inicial extends JDialog{
 
                     if (escolhaAcompanha < acompanhamentos.size()){
                         Acompanhamento acompanhaEscolhido = acompanhamentos.get(escolhaAcompanha);
+                        String quantidadeStr = JOptionPane.showInputDialog("Quantos " +
+                                acompanhaEscolhido.getNome() + " você deseja?");
+                        int quantidadeAcomp = Integer.parseInt(quantidadeStr);
+                        
+                        acompanhaEscolhido.setQuantidade(quantidadeAcomp);
+
                         acompanhamentosEscolhidos.add(acompanhaEscolhido);
                     }
 
@@ -327,17 +253,13 @@ public class Menu_Inicial extends JDialog{
                 Pedido pedido = new Pedido(produtoEscolhido.getNome(), produtoEscolhido.getDescricao(),
                         produtoEscolhido.getPreco(), null, restauranteEscolhido);
                 ItemPedido itemPedido = new ItemPedido(pedido, quantidade);
+
                 for (Acompanhamento acompanhamento : acompanhamentosEscolhidos) {
                     itemPedido.adicionarAcompanhamento(acompanhamento);
                 }
                 carrinho.adicionarItem(itemPedido);
 
-                //JOptionPane.showMessageDialog(null, "Item adicionado ao pedido: " +
-                //        itemPedido.getPedido().getNome() + " com " + itemPedido.getAcompanhamentos().size() +
-                //        " acompanhamentos. \nPreço total: R$" + itemPedido.getPrecoTotal());
-                carrinho.ExibirCarrinho();
-
-
+                carrinho.ExibirCarrinho(this);
 
             }
         }

@@ -18,13 +18,6 @@ public class Acompanhamento extends Base {
         this.quantidade = 1;
         this.valor_total = valor;
     }
-    Acompanhamento( String nome, double valor, String descricao){
-        this.nome = nome;
-        this.valor = valor;
-        this.descricao = descricao;
-        this.quantidade = 1;
-        this.valor_total = valor;
-    }
 
     public String getNome() {
         return nome;

@@ -1,13 +1,12 @@
 package Entity;
 
 import java.util.List;
-import java.math.BigDecimal;
 
 public class Pedido extends Base {
 
     private String nome;
     private String descricao;
-    private double preco;
+    private double precoProd;
     private Categoria categoria;
     private Restaurante restaurante;
     private List<Acompanhamento> acompanhamento;
@@ -15,7 +14,7 @@ public class Pedido extends Base {
     Pedido(String nome, String descricao, double preco, Categoria categoria, Restaurante restaurante){
         this.nome = nome;
         this.descricao = descricao;
-        this.preco = preco;
+        this.precoProd = preco;
         this.categoria = categoria;
         this.restaurante = restaurante;
     }
@@ -29,8 +28,8 @@ public class Pedido extends Base {
         return descricao;
     }
 
-    public double getPreco() {
-        return preco;
+    public double getPrecoProd() {
+        return precoProd;
     }
 
     public Categoria getCategoria() {
@@ -39,6 +38,10 @@ public class Pedido extends Base {
 
     public Restaurante getRestaurante() {
         return restaurante;
+    }
+
+    public String getNomeRestaurante(){
+        return getRestaurante().getNome();
     }
 
     public List<Acompanhamento> getAcompanhamento() {
