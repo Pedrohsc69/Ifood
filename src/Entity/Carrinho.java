@@ -2,8 +2,18 @@ package Entity;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import org.json.JSONObject;
+
 
 public class Carrinho {
     private List<ItemPedido> itens;
@@ -45,26 +55,24 @@ public class Carrinho {
         }
 
         detalhesCarrinho.append("\n\n--Preço total do pedido: R$").append(getValorTotal()).append("\n");
-        //JOptionPane.showMessageDialog(null, detalhesCarrinho.toString(),
-        //        "Carrinho", JOptionPane.INFORMATION_MESSAGE);
 
-        // Cria painel com botões
+
         JPanel panel = new JPanel(); panel.setLayout(new BorderLayout());
         JTextArea textArea = new JTextArea(detalhesCarrinho.toString());
         textArea.setEditable(false);
         panel.add(new JScrollPane(textArea), BorderLayout.CENTER);
 
-        // Botões
+
         JButton adicionarProdutos = new JButton("Adicionar mais produtos");
         JButton adicionarEndereco = new JButton("Adicionar endereço de entrega");
 
-        // Ações dos botões
+
         adicionarProdutos.addActionListener(e -> {
-            JOptionPane.getRootFrame().dispose();// Fecha o diálogo atual
-            menu_inicial.listarRestaurantes();// Retorna à listagem de restaurantes
+            JOptionPane.getRootFrame().dispose();
+            menu_inicial.listarRestaurantes();
         });
         adicionarEndereco.addActionListener(e -> {
-            JOptionPane.getRootFrame().dispose(); // Fecha o diálogo atual
+            JOptionPane.getRootFrame().dispose();
             adicionarEndereco();
         });
         JPanel buttonPanel = new JPanel();
@@ -75,6 +83,7 @@ public class Carrinho {
     }
 
     private void adicionarEndereco(){
+
         JTextField ruaField = new JTextField();
         JTextField bairroField = new JTextField();
         JTextField cidadeField = new JTextField();
@@ -86,50 +95,107 @@ public class Carrinho {
 
         JPanel panel = new JPanel(new GridLayout(0, 2));
 
-        panel.add(new JLabel("Rua:"));
+        panel.add(new JLabel("*Rua:"));
         panel.add(ruaField);
 
-        panel.add(new JLabel("Bairro:"));
+        panel.add(new JLabel("*Bairro:"));
         panel.add(bairroField);
 
-        panel.add(new JLabel("Cidade:"));
+        panel.add(new JLabel("*Cidade:"));
         panel.add(cidadeField);
 
         panel.add(new JLabel("Estado:"));
         panel.add(estadoField);
 
-        panel.add(new JLabel("Número:"));
+        panel.add(new JLabel("*Número:"));
         panel.add(numeroCasaField);
 
-        panel.add(new JLabel("Complemento:"));
+        panel.add(new JLabel("*Complemento:"));
         panel.add(complementoField);
 
-        panel.add(new JLabel("Ponto de Referência:"));
+        panel.add(new JLabel("*Ponto de Referência:"));
         panel.add(pontoReferenciaField);
 
-        panel.add(new JLabel("CEP:"));
+        panel.add(new JLabel("*CEP:"));
         panel.add(cepField);
+
+        cepField.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e){
+                buscarCep(cepField.getText(), cidadeField, estadoField);
+            }
+        });
 
         int result = JOptionPane.showConfirmDialog(null, panel,
                 "Endereço de Entrega", JOptionPane.OK_CANCEL_OPTION);
-        if (result == JOptionPane.OK_OPTION) {
-            Endereco endereco = new Endereco( 0, // ID fictício para exemplo
-                    ruaField.getText(),
-                    bairroField.getText(),
-                    cidadeField.getText(),
-                    Integer.parseInt(numeroCasaField.getText()),
-                    pontoReferenciaField.getText(), cepField.getText()
-            );
 
-            endereco.setEstado(estadoField.getText());
-            endereco.setComplemento(complementoField.getText());
+        boolean enderecoValido = false;
 
-            JOptionPane.showMessageDialog(null, "Endereço adicionado: \n"
-                    + endereco.getRua() + ", " + endereco.getNumeroCasa() + "\n" + endereco.getBairro() +
-                    " - " + endereco.getCidade() + ", " + endereco.getEstado() + "\n" + "CEP: "
-                    + endereco.getCep() + "\n" + "Ponto de Referência: " + endereco.getPontoReferencia()
-                    + "\n" + "Complemento: " + endereco.getComplemento());
+        while (!enderecoValido){
+            if (result == JOptionPane.OK_OPTION) {
+                if (validarDadosEndereco(ruaField, bairroField, cidadeField, numeroCasaField, pontoReferenciaField, cepField)){
+                    Endereco endereco = new Endereco( 0, // ID fictício para exemplo
+                            ruaField.getText(),
+                            bairroField.getText(),
+                            cidadeField.getText(),
+                            Integer.parseInt(numeroCasaField.getText()),
+                            pontoReferenciaField.getText(), cepField.getText()
+                    );
 
+                    endereco.setEstado(estadoField.getText());
+                    endereco.setComplemento(complementoField.getText());
+
+                    JOptionPane.showMessageDialog(null, "Endereço adicionado: \n"
+                            + endereco.getRua() + ", " + endereco.getNumeroCasa() + "\n" + endereco.getBairro() +
+                            " - " + endereco.getCidade() + ", " + endereco.getEstado() + "\n" + "CEP: "
+                            + endereco.getCep() + "\n" + "Ponto de Referência: " + endereco.getPontoReferencia()
+                            + "\n" + "Complemento: " + endereco.getComplemento());
+                } else {
+                    JOptionPane.showMessageDialog(null,
+                            "Por favor, preencha todos os campos obrigatórios.", "Erro",
+                            JOptionPane.ERROR_MESSAGE);
+
+                }
+            }
         }
     }
+    private boolean validarDadosEndereco(JTextField ruaField, JTextField bairroField, JTextField cidadeField, JTextField numeroCasaField, JTextField pontoReferenciaField, JTextField cepField){
+
+        return !ruaField.getText().isEmpty() &&
+                !bairroField.getText().isEmpty() &&
+                !cidadeField.getText().isEmpty() &&
+                !numeroCasaField.getText().isEmpty() &&
+                !pontoReferenciaField.getText().isEmpty() &&
+                !cepField.getText().isEmpty();
+    }
+
+    private void buscarCep(String cep, JTextField cidadeField, JTextField estadoField){
+        try {
+            URL url = new URL("https://viacep.com.br/ws/" + cep + "/json/");
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+
+            BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            StringBuilder response = new StringBuilder();
+            String inputline;
+            while ((inputline = br.readLine()) != null){
+                response.append(inputline);
+            }
+            br.close();
+
+            JSONObject jsonObject = new JSONObject(response.toString());
+            String cidade = jsonObject.getString("localidade");
+            String estado = jsonObject.getString("uf");
+
+            cidadeField.setText(cidade);
+            estadoField.setText(estado);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Erro ao buscar o CEP." +
+                    " Verifique e tente novamente.", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }
+
 }

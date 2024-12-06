@@ -41,8 +41,9 @@ public class Menu_Inicial extends JDialog{
         try{
 
             String query = "SELECT r.id, r.nome, p.id AS prod_id, p.nome AS prod_nome, p.preco" +
-                    "FROM restaurante r " +
-                    "JOIN produto p ON r.id = p.id_restaurante";
+                    "FROM restaurante AS r " +
+                    "JOIN produto AS p ON r.id = p.id_restaurante";
+
             Statement statement = conexao.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
 
