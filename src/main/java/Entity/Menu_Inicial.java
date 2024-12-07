@@ -25,13 +25,13 @@ public class Menu_Inicial extends JDialog{
     public Menu_Inicial(List<Associacao_Rest_Prod> associacoes, List<Associacao_Prod_Acomp> Assoc_Prod_Acomp) {
         this.Assoc_Rest_Prod = associacoes;
         this.Assoc_Prod_Acomp = Assoc_Prod_Acomp;
-        this.carrinho = new Carrinho();
+        this.carrinho = new Carrinho(this);
         this.conexao = Conexao_BD.getConexao();
         carregarAssociacoesRest();
     }
 
     public Menu_Inicial() {
-        this.carrinho = new Carrinho();
+        this.carrinho = new Carrinho(this);
         this.conexao = Conexao_BD.getConexao();
         carregarAssociacoesRest();
         carregarAssociacaoProd();
@@ -110,6 +110,8 @@ public class Menu_Inicial extends JDialog{
 
 
     public void Exibir_Menu() {
+        carrinho.limparCarrinho();
+
         JPanel panel = new JPanel(new BorderLayout());
         JLabel label = new JLabel("<html><body style='width: 250px;'>" +
                 "<h2 style='color: red; font-size: 20px;'>***SEJA BEM VINDO***</h2> </body></html>");

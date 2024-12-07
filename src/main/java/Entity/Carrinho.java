@@ -1,8 +1,11 @@
 package Entity;
 
+import Entity.Status_Entrega;
+import Entity.Pedido;
 import javax.management.timer.Timer;
 import javax.swing.*;
 import java.awt.*;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.event.FocusAdapter;
@@ -19,10 +22,12 @@ public class Carrinho {
     private Endereco endereco;
     private List<ItemPedido> itens;
     private double valorTotal;
+    private Menu_Inicial menu_inicial;
 
-    public Carrinho() {
-        this.itens = new ArrayList<>();
+    public Carrinho(Menu_Inicial menu_inicial) {
+        this.itens = new ArrayList();
         this.valorTotal = 0.0;
+        this.menu_inicial = menu_inicial;
     }
 
     public void adicionarItem(ItemPedido item) {
@@ -36,6 +41,9 @@ public class Carrinho {
 
     public List<ItemPedido> getItens() {
         return itens;
+    }
+    public void limparCarrinho(){
+        itens.clear();
     }
 
     public void ExibirCarrinho(Menu_Inicial menu_inicial){
@@ -246,14 +254,12 @@ public class Carrinho {
                                             "Por favor, insira um valor válido para o troco.",
                                             "Erro", JOptionPane.ERROR_MESSAGE);
                                 }
-                            } else {
-                                JOptionPane.showMessageDialog(null,
-                                        "Você escolheu pagar com dinheiro e não precisa de troco.");
                             }
                         }
                     } else {
                         JOptionPane.showMessageDialog(null,
                                 "Você escolheu pagar com dinheiro e não precisa de troco.");
+                        resumoPedido(endereco, "Dinheiro", false, 0.0);
                     }
                     break;
 
@@ -375,7 +381,24 @@ public class Carrinho {
         JButton concluirPedidoButton = new JButton("Concluir pedido");
         concluirPedidoButton.addActionListener(e -> {
             frame.dispose();
-            Status_Pedido statusPedido = new Status_Pedido();
+
+            if (itens.isEmpty()) {
+                JOptionPane.showMessageDialog(frame, "O carrinho está vazio!",
+                        "Erro", JOptionPane.ERROR_MESSAGE); return;
+            }
+            // Supondo que o primeiro item representa o pedido principal
+            ItemPedido itemPedido = itens.getFirst();
+            String nome = itemPedido.getPedido().getNome();
+            String descricao = itemPedido.getPedido().getDescricao();
+            double preco = itemPedido.getPedido().getPrecoProd();
+            Categoria categoria = itemPedido.getPedido().getCategoria();
+            Restaurante restaurante = itemPedido.getPedido().getRestaurante();
+
+            Timestamp dataHora = new Timestamp(System.currentTimeMillis());
+            Pedido pedido = new Pedido(nome, descricao, preco, categoria, restaurante);
+            Historico_Pedido.salvarPedido(Status_Entrega.ENTREGUE, pedido, dataHora);
+
+            Status_Pedido statusPedido = new Status_Pedido(menu_inicial);
             javax.swing.Timer timer = new javax.swing.Timer(2000, event ->{
                 int progresso = statusPedido.progressBar.getValue();
                 if (progresso == 0){

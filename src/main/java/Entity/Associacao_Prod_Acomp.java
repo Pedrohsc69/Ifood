@@ -9,7 +9,7 @@ public class Associacao_Prod_Acomp {
 
     Associacao_Prod_Acomp(Produto produto){
         this.produto = produto;
-        this.acompanhamentos = new ArrayList<>();
+        this.acompanhamentos = new ArrayList();
     }
 
     public Produto getProduto(){

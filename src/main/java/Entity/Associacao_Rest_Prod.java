@@ -9,7 +9,7 @@ public class Associacao_Rest_Prod {
 
     public Associacao_Rest_Prod(Restaurante restaurante) {
         this.restaurante = restaurante;
-        this.produtos = new ArrayList<>();
+        this.produtos = new ArrayList();
     }
 
     public Restaurante getRestaurante() {

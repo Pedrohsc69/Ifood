@@ -18,6 +18,9 @@ public class Pedido extends Base {
         this.categoria = categoria;
         this.restaurante = restaurante;
     }
+    Pedido(){
+
+    }
 
     public String getNome() {
         return nome;
