@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e209fc4f-eb39-4de5-875c-6dac83c5be80" name="Changes" comment="Adjustments to cart logic and created &quot;adicionarEndereco()&quot; function">
+    <list default="true" id="e209fc4f-eb39-4de5-875c-6dac83c5be80" name="Changes" comment="VIA CEP API added">
+      <change afterPath="$PROJECT_DIR$/src/Entity/Status_Pedido.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Ifood.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Ifood.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/Carrinho.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Carrinho.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Menu_Inicial.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Menu_Inicial.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,22 +56,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Main.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "master",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Flávio Cavalcanti/Downloads/json-20240303.jar",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "project.propVCSSupport.Mappings"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Flávio Cavalcanti/Downloads/json-20240303.jar&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.Mappings&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Flávio Cavalcanti\Desktop\PEDRO\FACULDADE\2º PERIODO\JAVA POO\Ifood\src\Entity\Icons" />
@@ -168,7 +167,15 @@
       <option name="project" value="LOCAL" />
       <updated>1733424505767</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="VIA CEP API added">
+      <option name="closed" value="true" />
+      <created>1733496572048</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1733496572048</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -203,7 +210,8 @@
     <MESSAGE value="Adjustments to the connection with BD and start customizing menus" />
     <MESSAGE value="Adjustments in menu" />
     <MESSAGE value="Adjustments to cart logic and created &quot;adicionarEndereco()&quot; function" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adjustments to cart logic and created &quot;adicionarEndereco()&quot; function" />
+    <MESSAGE value="VIA CEP API added" />
+    <option name="LAST_COMMIT_MESSAGE" value="VIA CEP API added" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

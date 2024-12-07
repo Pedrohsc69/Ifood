@@ -1,9 +1,8 @@
 package Entity;
 
+import javax.management.timer.Timer;
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
-import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.event.FocusAdapter;
@@ -12,10 +11,12 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+
 import org.json.JSONObject;
 
 
 public class Carrinho {
+    private Endereco endereco;
     private List<ItemPedido> itens;
     private double valorTotal;
 
@@ -95,17 +96,20 @@ public class Carrinho {
 
         JPanel panel = new JPanel(new GridLayout(0, 2));
 
-        panel.add(new JLabel("*Rua:"));
-        panel.add(ruaField);
-
-        panel.add(new JLabel("*Bairro:"));
-        panel.add(bairroField);
+        panel.add(new JLabel("*CEP:"));
+        panel.add(cepField);
 
         panel.add(new JLabel("*Cidade:"));
         panel.add(cidadeField);
 
         panel.add(new JLabel("Estado:"));
         panel.add(estadoField);
+
+        panel.add(new JLabel("*Rua:"));
+        panel.add(ruaField);
+
+        panel.add(new JLabel("*Bairro:"));
+        panel.add(bairroField);
 
         panel.add(new JLabel("*Número:"));
         panel.add(numeroCasaField);
@@ -116,8 +120,6 @@ public class Carrinho {
         panel.add(new JLabel("*Ponto de Referência:"));
         panel.add(pontoReferenciaField);
 
-        panel.add(new JLabel("*CEP:"));
-        panel.add(cepField);
 
         cepField.addFocusListener(new FocusAdapter() {
             @Override
@@ -134,7 +136,7 @@ public class Carrinho {
         while (!enderecoValido){
             if (result == JOptionPane.OK_OPTION) {
                 if (validarDadosEndereco(ruaField, bairroField, cidadeField, numeroCasaField, pontoReferenciaField, cepField)){
-                    Endereco endereco = new Endereco( 0, // ID fictício para exemplo
+                    endereco = new Endereco( 0, // ID fictício para exemplo
                             ruaField.getText(),
                             bairroField.getText(),
                             cidadeField.getText(),
@@ -150,12 +152,17 @@ public class Carrinho {
                             " - " + endereco.getCidade() + ", " + endereco.getEstado() + "\n" + "CEP: "
                             + endereco.getCep() + "\n" + "Ponto de Referência: " + endereco.getPontoReferencia()
                             + "\n" + "Complemento: " + endereco.getComplemento());
+                    enderecoValido = true;
+
+                    formaPagamento();
                 } else {
                     JOptionPane.showMessageDialog(null,
                             "Por favor, preencha todos os campos obrigatórios.", "Erro",
                             JOptionPane.ERROR_MESSAGE);
-
+                    adicionarEndereco();
                 }
+            } else {
+                enderecoValido = true;
             }
         }
     }
@@ -195,7 +202,196 @@ public class Carrinho {
             JOptionPane.showMessageDialog(null, "Erro ao buscar o CEP." +
                     " Verifique e tente novamente.", "Erro", JOptionPane.ERROR_MESSAGE);
         }
-
     }
 
+    private void formaPagamento(){
+
+        String[] opcoesPagamento = {"Pix", "Dinheiro", "Cartão"};
+        String escolhaPagamento = (String) JOptionPane.showInputDialog(null,
+                "Escolha a forma de pagamento:", "Forma de pagamento",
+                JOptionPane.QUESTION_MESSAGE, null, opcoesPagamento, opcoesPagamento[0]);
+
+        if (escolhaPagamento != null){
+            switch (escolhaPagamento){
+                case "Pix":
+                    telaPix(getValorTotal());
+                    break;
+
+                case "Dinheiro":
+                    String[] opcoesMenuAcomp = { "Sim", "Não" };
+                    int respostaTroco = JOptionPane.showOptionDialog(null, "Você precisa" +
+                            " de Troco? \n Total: R$" + getValorTotal(), "Troco", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
+                            null ,opcoesMenuAcomp, opcoesMenuAcomp[0]);
+
+                    if (respostaTroco == 0) {
+                        boolean valorTrocoValido = false;
+                        while (!valorTrocoValido) {
+                            String valorTrocoStr = JOptionPane.showInputDialog("Para quanto você precisa de Troco?");
+
+                            if (valorTrocoStr != null && !valorTrocoStr.isEmpty()) {
+                                try{
+                                    double valorTroco = Double.parseDouble(valorTrocoStr);
+                                    if (valorTroco > getValorTotal()){
+                                        valorTrocoValido = true;
+                                        JOptionPane.showMessageDialog(null,
+                                                "Você escolheu pagar com dinheiro e precisa de troco para: R$" + valorTrocoStr);
+                                        resumoPedido(endereco, "Dinheiro", true, valorTroco);
+                                    } else {
+                                        JOptionPane.showMessageDialog(null,
+                                                "O valor do troco deve ser maior ou igual ao valor total do pedido: R$ "
+                                                        + getValorTotal(), "Erro", JOptionPane.ERROR_MESSAGE);
+                                    }
+                                } catch (NumberFormatException e){
+                                    JOptionPane.showMessageDialog(null,
+                                            "Por favor, insira um valor válido para o troco.",
+                                            "Erro", JOptionPane.ERROR_MESSAGE);
+                                }
+                            } else {
+                                JOptionPane.showMessageDialog(null,
+                                        "Você escolheu pagar com dinheiro e não precisa de troco.");
+                            }
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null,
+                                "Você escolheu pagar com dinheiro e não precisa de troco.");
+                    }
+                    break;
+
+                case "Cartão":
+                    escolhaCartao();
+                    break;
+
+                default:
+                    JOptionPane.showMessageDialog(null,
+                            "Forma de pagamento inválida. Por favor, escolha novamente.");
+                    formaPagamento();
+                    break;
+            }
+        } else {
+            JOptionPane.showMessageDialog(null,
+                    "Nenhuma forma de pagamento selecionada. Por favor, escolha uma forma de pagamento.");
+            formaPagamento();
+        }
+    }
+
+    private void telaPix(double valorTotal){
+        JPanel panel = new JPanel(new GridLayout(0, 1));
+        JLabel valorLabel = new JLabel("Valor do Pix: R$ " + valorTotal);
+        JLabel chavePixLabel = new JLabel("Chave Pix: chavepix@exemplo.com");
+        JButton pixFinalizadoButton = new JButton("Pix finalizado");
+
+        pixFinalizadoButton.addActionListener(e -> {
+            JOptionPane.getRootFrame().dispose(); // Fecha o diálogo atual
+            // Chame a próxima etapa ou tela aqui
+            JOptionPane.showMessageDialog(null, "Pix finalizado com sucesso!");
+            resumoPedido(endereco, "Pix", false, 0);
+        });
+
+     panel.add(valorLabel);
+     panel.add(chavePixLabel);
+     panel.add(pixFinalizadoButton);
+
+     JOptionPane.showMessageDialog(null, panel, "Pagamento via Pix", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    private void escolhaCartao(){
+        String[] opcoesCartao = {"Crédito", "Débito"};
+        String escolhaCartao = (String) JOptionPane.showInputDialog( null,
+                "Escolha o tipo de cartão:", "Tipo de Cartão",
+                JOptionPane.QUESTION_MESSAGE, null, opcoesCartao, opcoesCartao[0]);
+
+        if (escolhaCartao != null) {
+            JOptionPane.showMessageDialog(null,
+                    "Você escolheu pagar com Cartão de " + escolhaCartao +
+                            ". O pagamento será feito na entrega.");
+            resumoPedido(endereco, "Cartão de " + escolhaCartao, false, 0);
+        } else {
+            JOptionPane.showMessageDialog(null,
+                    "Nenhuma opção de cartão selecionada. Por favor, escolha uma opção.");
+            escolhaCartao();
+        }
+    }
+
+    private void resumoPedido(Endereco endereco, String formaPagamento, boolean precisaTroco, double valorTroco) {
+        JFrame frame = new JFrame("Resumo do Pedido");
+        frame.setSize(400, 500);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setLayout(new BorderLayout());
+
+        StringBuilder resumo = new StringBuilder();
+
+        resumo.append("***Endereço de Entrega:\n");
+        resumo.append("Rua: ").append(endereco.getRua()).append(", Nº").append(endereco.getNumeroCasa())
+                .append(" - ").append(endereco.getBairro());
+        resumo.append("\nCep: ").append(endereco.getCep()).append(" - ").append(endereco.getCidade())
+                .append(" - ").append(endereco.getEstado());
+        resumo.append("\nPonto de referência: ").append(endereco.getPontoReferencia());
+        if (!endereco.getComplemento().isEmpty()) {
+            resumo.append("\nComplemento: ").append(endereco.getComplemento()).append("\n\n");
+        }
+
+        double precoTotalProd = 0.0;
+        for (ItemPedido item : itens) {
+            resumo.append("***Restaurante escolhido: ").append(item.getNomeRestaurante());
+            resumo.append("\n--Produtos escolhidos:");
+            resumo.append("\n-Nome: ").append(item.getPedido().getNome());
+            resumo.append("\n-Quantidade: ").append(item.getQuantidade());
+            resumo.append("\n-Preço total produtos: R$").append(item.getPrecoTotalProd());
+            resumo.append("\n\n--Acompanhamentos:");
+            for (Acompanhamento acompanhamento : item.getAcompanhamentos()) {
+                resumo.append("\n-Nome: ").append(acompanhamento.getNome())
+                        .append("\n-Quantidade: ").append(acompanhamento.getQuantidade())
+                        .append("\n-Preço total acomapanhamentos: R$").append(acompanhamento.getValor_total());
+            }
+            precoTotalProd += item.getPrecoTotalProd();
+        }
+        resumo.append("\n\n--Preço total do pedido: R$").append(getValorTotal());
+
+        double precoTotalAcomp = 0.0;
+        for (ItemPedido item : itens) {
+            for (Acompanhamento acompanhamento : item.getAcompanhamentos()) {
+                precoTotalAcomp = precoTotalAcomp + acompanhamento.getValor_total();
+            }
+        }
+        double precoTotalPedido = precoTotalAcomp + precoTotalProd;
+        resumo.append("\n\n***Forma de Pagamento: ").append(formaPagamento);
+        if (formaPagamento.equals("Dinheiro")) {
+            if (precisaTroco) {
+                resumo.append("\n-Precisa de Troco: Sim");
+                resumo.append("\n-Troco para: R$").append(valorTroco);
+                double calcTroco = valorTroco - precoTotalPedido;
+                resumo.append("\n-Troco: R$").append(calcTroco);
+            } else {
+                resumo.append("\n-Precisa de Troco: Não\n");
+            }
+        }
+
+
+
+        JTextArea textArea = new JTextArea(resumo.toString());
+        textArea.setEditable(false);
+        frame.add(new JScrollPane(textArea), BorderLayout.CENTER);
+
+        JButton concluirPedidoButton = new JButton("Concluir pedido");
+        concluirPedidoButton.addActionListener(e -> {
+            frame.dispose();
+            Status_Pedido statusPedido = new Status_Pedido();
+            javax.swing.Timer timer = new javax.swing.Timer(2000, event ->{
+                int progresso = statusPedido.progressBar.getValue();
+                if (progresso == 0){
+                    statusPedido.atualizarStatus("Pedido em produção", 33);
+                } else if (progresso == 33) {
+                    statusPedido.atualizarStatus("Pedido a caminho", 66);
+                } else if (progresso == 66) {
+                    statusPedido.atualizarStatus("Pedido entregue", 100);
+                    ((Timer) event.getSource()).stop();
+                }
+            });
+            timer.start();
+        });
+        frame.add(concluirPedidoButton, BorderLayout.SOUTH);
+        frame.setVisible(true);
+
+
+    }
 }
